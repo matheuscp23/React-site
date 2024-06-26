@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import HomePage from "./Paginas/HomePage";
+import AboutMe from "./Paginas/AboutMe";
+import PagErro from "./Paginas/Pagina404";
+import Menu from "./componentes/Menu";
+import Rodape from "./componentes/Rodape";
+import LayoutPadrao from "./componentes/LayoutPadrao";
+import Post from "./Paginas/Post";
+import ScrollToTop from "./componentes/ScrollToTop";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <ScrollToTop />
+      <Menu />
+      <Routes>
+        <Route path="/" element={<LayoutPadrao />}>
+          <Route index element={<HomePage />} />
+          <Route path="sobremim" element={<AboutMe />} />
+        </Route>
+        <Route path="post/:id" element={<Post />} />
+        <Route path="*" element={<PagErro />} />
+      </Routes>
+      <Rodape />
+    </BrowserRouter>
   );
 }
 
